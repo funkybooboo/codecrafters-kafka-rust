@@ -29,6 +29,9 @@ fn handle_connection(mut stream: TcpStream) {
     response.put_i16(API_VERSIONS_MIN_VERSION); // Min Version
     response.put_i16(API_VERSIONS_MAX_VERSION); // Max Version
 
+    // Append the "Tagged Fields Section" (Required in v3+)
+    response.put_u8(0); // Zero-length tagged field array (single byte with value `0`)
+
     // Compute and update message length
     let message_length = (response.len() - 4) as i32; // Excluding the length field itself
     response[0..4].copy_from_slice(&message_length.to_be_bytes());
