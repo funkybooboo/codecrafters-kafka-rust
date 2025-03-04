@@ -3,7 +3,8 @@ use std::net::{TcpListener, TcpStream};
 use bytes::{Buf, BufMut};
 
 fn handle_connection(mut stream: TcpStream) {
-    let mut request = read_request(&mut stream).as_slice();
+    let request = read_request(&mut stream);
+    let mut request = request.as_slice();
 
     let _request_api_key = request.get_i16();
     let _request_api_version = request.get_i16();
