@@ -5,8 +5,8 @@ use bytes::{Buf, BufMut};
 fn handle_connection(mut stream: TcpStream) {
     let mut request = read_request(&mut stream);
 
-    let request_api_key = request.get_i16();
-    let request_api_version = request.get_i16();
+    let _request_api_key = request.get_i16();
+    let _request_api_version = request.get_i16();
     let correlation_id = request.get_i32();
 
     let mut response = Vec::with_capacity(8);
