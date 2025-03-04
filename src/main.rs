@@ -12,6 +12,7 @@ fn handle_connection(mut stream: TcpStream) {
     let mut response = Vec::with_capacity(8);
     response.put_i32(0);
     response.put_i32(correlation_id);
+    response.put_i16(35);
 
     stream.write_all(&response).unwrap();
 }
