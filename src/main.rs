@@ -3,11 +3,11 @@ use std::net::{TcpListener, TcpStream};
 use bytes::{Buf, BufMut};
 
 fn handle_connection(mut stream: TcpStream) {
-    let request = read_request(&mut stream);
+    let mut request = read_request(&mut stream).as_slice();
 
-    let _request_api_key = request.as_slice().get_i16();
-    let _request_api_version = request.as_slice().get_i16();
-    let correlation_id = request.as_slice().get_i32();
+    let _request_api_key = request.get_i16();
+    let _request_api_version = request.get_i16();
+    let correlation_id = request.get_i32();
 
     let mut response = Vec::with_capacity(8);
     response.put_i32(0);
